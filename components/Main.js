@@ -6,6 +6,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import ProfileScreen from './ProfileScreen.js';
 import SettingsScreen from './SettingsScreen.js';
+import Timer from './Timer.js'
 import s from './Style';
 
 const Tab = createMaterialTopTabNavigator();
@@ -15,6 +16,7 @@ const Main = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="timer" component={Timer} />
         {profileNames.map(i =>
             <Tab.Screen
               name={i}

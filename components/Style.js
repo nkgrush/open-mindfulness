@@ -11,6 +11,7 @@ const styleLight = StyleSheet.create({
   container: {
     flex: 1,
     alignContent: 'center',
+    padding: 16,
   },
 });
 
