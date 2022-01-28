@@ -6,13 +6,13 @@ import s from './Style';
 const margin = 16;
 
 const Circle = ({children, color, extraMargin= 0}) => {
-  var { height, width } = useWindowDimensions();
-  let diam = Math.min(height, width) - margin*2 - extraMargin;
+  let diam = `${100-extraMargin}%`;
 
   return <View style={{
     width: diam,
-    height: diam,
-    borderRadius: diam/2,
+    height: undefined,
+    aspectRatio: 1,
+    borderRadius: 2000,
     backgroundColor: color,
     justifyContent: 'center',
     alignContent: 'center',
@@ -37,7 +37,7 @@ const ProfileScreen = ({route}) => {
   return (
     <View style={[styles.container, s.container]}>
       <Circle color='red'>
-        <Circle color='white' extraMargin={30}>
+        <Circle color='white' extraMargin={5}>
           <View style={{height: '70%', width: '85%', justifyContent: 'center'}}>
             <Text adjustsFontSizeToFit={true} style={[s.header, styles.numbers]}>{display}</Text>
           </View>
