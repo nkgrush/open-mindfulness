@@ -16,16 +16,14 @@ const exampleOptions = [
   {text: 'hellouu', id: 'h4'},
 ]
 
-const BadgeConfig = ({title, options, onActiveChange, defaultActive}) => {
+const BadgeConfig = ({title, options, active, onActiveChange}) => {
   options = exampleOptions;
-  defaultActive = defaultActive ?? options[0].id;
   onActiveChange = onActiveChange ?? ((x) => {});
-  const [active, setActive] = useState(defaultActive);
 
   return (
     <View style={{marginBottom: 20}}>
       <Text style={s.header}>{title}</Text>
-      <Text>
+      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {
           options.map(el => (
             <Badge
@@ -34,12 +32,11 @@ const BadgeConfig = ({title, options, onActiveChange, defaultActive}) => {
               isActive={el.id == active}
               onPress={() => {
                 onActiveChange(el.id);
-                setActive(el.id);
               }}
             />
           ))
         }
-      </Text>
+      </View>
     </View>
   );
 };

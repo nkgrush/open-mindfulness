@@ -19,15 +19,6 @@ const Main = () => {
       <Tab.Navigator>
         <Tab.Screen name="timer" component={TimerScreen} />
         <Tab.Screen name="badge" component={BadgeScreen} />
-        {profileNames.map(i =>
-            <Tab.Screen
-              name={i}
-              key={i}
-              component={ProfileScreen}
-              initialParams={{ profileName: i }}
-            />
-        )}
-        <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
