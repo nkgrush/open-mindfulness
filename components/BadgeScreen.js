@@ -1,27 +1,23 @@
-import React, {useState} from 'react';
+import React, { useContext, useState } from "react";
 import { Text, View, StyleSheet, TextInput, FlatList } from "react-native";
 
 import Badge from './Badge.js';
 import s from './Style.js'
 import BadgeConfig from "./BadgeConfig";
+import {ConfigContext} from "./ConfigContext";
 
 let dummySections = {
   badge: 'Badge..',
   option1: 'Config 🎉',
 }
 
-let dummyConfig = {
-  badge: 'hello',
-  option1: 'badgerhinoo',
-}
+const BadgeScreen = ({navigation, route, defaultConfig, sections}) => {
+  sections = dummySections; //FIXME
 
-const BadgeScreen = ({defaultConfig, sections}) => {
-  defaultConfig = defaultConfig ?? dummyConfig;
-  sections = sections ?? dummySections;
-  let [config, setConfig] = useState(defaultConfig)
+  let {config, setConfig} = useContext(ConfigContext);
 
   let setter = (key) => (
-    (val) => { setConfig({...config, [key]: val});});
+      (val) => { setConfig({...config, [key]: val});});
 
   let data = Object.keys(sections)
     .map((id) => ({id: id, title: sections[id], active: config[id]}));
