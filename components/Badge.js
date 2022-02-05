@@ -5,8 +5,9 @@ const defaultHeight = 20;
 
 const colors = [ 'red', 'gold', 'greenyellow', 'mediumslateblue', 'royalblue', 'salmon', 'orange', 'pink', 'yellowgreen' ];
 
-const Badge = ({text, fontSize=22, color='red', onPress, isActive}) => {
-  let [bg, setBg] = useState(colors[Math.floor(Math.random()*colors.length)]);
+const Badge = ({text, fontSize=22, color, onPress, isActive}) => {
+  color = color ?? colors[Math.floor(Math.random()*colors.length)];
+  let [bg, setBg] = useState(color);
 
   const badgeStyle = {
     backgroundColor: (isActive ? bg : 'lightgrey'),
@@ -19,7 +20,7 @@ const Badge = ({text, fontSize=22, color='red', onPress, isActive}) => {
     color: 'black',
     fontWeight: isActive ? 'bold' : 'normal',
     fontSize: fontSize,
-  }
+  };
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={badgeStyle}>

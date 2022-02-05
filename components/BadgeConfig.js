@@ -1,42 +1,32 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import { Text, View, ScrollView, StyleSheet, TextInput } from "react-native";
 
 import Badge from './Badge.js';
 import s from './Style.js'
 
-const exampleOptions = [
-  {text: 'Text', id: 'id'},
-  {text: 'hellouu', id: 'hello'},
-  {text: 'my name', id: 'name'},
-  {text: 'is fancy', id: 'fancy'},
-  {text: 'badgerhinoo', id: 'badgerhinoo'},
-  {text: 'hellouu', id: 'h1'},
-  {text: 'hellouu', id: 'h2'},
-  {text: 'hellouu', id: 'h3'},
-  {text: 'hellouu', id: 'h4'},
-]
-
-const BadgeConfig = ({title, options, active, onActiveChange}) => {
-  options = exampleOptions;
+const BadgeConfig = ({title, fontSize, options, active, onActiveChange, horizontalScroll}) => {
   onActiveChange = onActiveChange ?? ((x) => {});
+
+  const content = options.map(el => (
+    <Badge
+      text={el.text}
+      key={el.id}
+      isActive={el.id == active}
+      onPress={() => {
+        onActiveChange(el.id);
+      }}
+      fontSize={fontSize}
+      color={el.color}
+    />
+  ));
 
   return (
     <View style={{marginBottom: 20}}>
       <Text style={s.header}>{title}</Text>
-      <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-        {
-          options.map(el => (
-            <Badge
-              text={el.text}
-              key={el.id}
-              isActive={el.id == active}
-              onPress={() => {
-                onActiveChange(el.id);
-              }}
-            />
-          ))
-        }
-      </View>
+      {horizontalScroll ?
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>{content}</ScrollView> :
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{content}</View>
+      }
     </View>
   );
 };
