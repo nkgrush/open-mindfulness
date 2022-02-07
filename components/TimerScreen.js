@@ -4,6 +4,7 @@ import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacit
 import BackgroundTimer from 'react-native-background-timer';
 
 import s from './Style';
+import PushNotification from "react-native-push-notification";
 
 const margin = 16;
 
@@ -28,7 +29,7 @@ const ProfileScreen = ({route}) => {
   //const {time} = route.params;
 
   const
-    initialTime = 2*60,
+    initialTime = 10,
     hideStatusBar = true,
     bgColor = 'white',
     fgColor = 'red';
@@ -49,11 +50,19 @@ const ProfileScreen = ({route}) => {
         if (seconds >= 0) {
           setTime(seconds);
         } else {
-          setTime(0);
+          setTime(initialTime);
           setIsRunning(false);
         }
       },200);
-      return () => BackgroundTimer.stopBackgroundTimer();
+      return () => {
+        BackgroundTimer.stopBackgroundTimer();
+        PushNotification.localNotification({
+          channelId: 'timer',
+          title: "Time's up!",
+          message: "That's all.",
+          timeoutAfter: 2000,
+        });
+      };
     } else {
       /* Timer cleaned by useEffect return */
     }

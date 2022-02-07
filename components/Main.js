@@ -11,6 +11,7 @@ import TimerScreen from './TimerScreen.js';
 import BadgeScreen from './BadgeScreen.js';
 import { ConfigContext, defaultConfig, readConfig, sections, writeConfig } from "./ConfigContext";
 import s from './Style';
+import PushNotification from "react-native-push-notification";
 
 const Tab = createMaterialTopTabNavigator();
 const profileNames = ['1', '2', '3'];

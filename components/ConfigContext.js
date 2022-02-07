@@ -39,6 +39,6 @@ const writeConfig = async (value) => {
   } catch (e) {
     console.error('writeConfig:', e);
   }
-}
+};
 
 export {defaultConfig, ConfigContext, sections, readConfig, writeConfig};
