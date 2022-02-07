@@ -23,10 +23,9 @@ const Main = () => {
     writeConfig(newConfig);
   };
 
-
   useEffect(() => {
     readConfig(setConfig);
-  }, [])
+  }, []);
 
   return (
     <ConfigContext.Provider value={{config, updateConfig}}>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Text, View, StyleSheet, TextInput, FlatList} from "react-native";
+import { Text, View, StyleSheet, TextInput, FlatList, StatusBar } from "react-native";
 
 import Badge from './Badge.js';
 import s from './Style.js'
@@ -21,7 +21,7 @@ const dummyOptions = [
 let dummySections = {
   badge: {title: 'Badge..', options: dummyOptions},
   option1: {title: 'Config 🎉', options: dummyOptions},
-}
+};
 
 const BadgeScreen = ({route}) => {
   let {config, updateConfig} = useContext(ConfigContext);
@@ -43,6 +43,7 @@ const BadgeScreen = ({route}) => {
 
   return (
     <View style={s.container}>
+      <StatusBar hidden={true}/>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
