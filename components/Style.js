@@ -36,6 +36,7 @@ const styleLight = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
+    letterSpacing: 10,
   },
 });
 

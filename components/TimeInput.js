@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import VirtualKeyboard from 'react-native-virtual-keyboard';
+import backspace from '../backspace.png';
 
 import {
   View,
@@ -59,7 +60,7 @@ const TimeInput = ({hideModal, initialSeconds, setResult}) => {
             <Text style={s.modalHeader}>mm:ss</Text>
             <Text style={s.modalTime}>{inputToText(input)}</Text>
             <VirtualKeyboard clearOnLongPress color="white" pressMode="string"
-                             onPress={setInput}/>
+                             backspaceImg={backspace} textStyle={{fontSize: 50}} onPress={(val) => setInput(val.replace(/^0+/, ''))}/>
           </View>
       </TouchableWithoutFeedback>
     </TouchableOpacity>
