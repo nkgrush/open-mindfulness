@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
+import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacity, Modal } from "react-native";
 
 import BackgroundTimer from 'react-native-background-timer';
 
 import s from './Style';
 import PushNotification from "react-native-push-notification";
+import {TimeInput, secondsToString } from "./TimeInput";
 
 const margin = 16;
 
@@ -29,17 +30,17 @@ const ProfileScreen = ({route}) => {
   //const {time} = route.params;
 
   const
-    initialTime = 10,
     hideStatusBar = true,
     bgColor = 'white',
     fgColor = 'red';
 
+  let [initialTime, setInitialTime] = useState(60*2);
   let [time, setTime] = useState(initialTime);
   let [isRunning, setIsRunning] = useState(false);
+  let [modal, setModal] = useState(false);
 
-  let mm = String(Math.floor(time/60)).padStart(2, '0');
-  let ss = String(Math.floor(time % 60)).padStart(2, '0');
-  let display = `${mm}:${ss}`;
+  let display = secondsToString(time);
+
 
   useEffect(() => {
     if (isRunning) {
@@ -52,29 +53,44 @@ const ProfileScreen = ({route}) => {
         } else {
           setTime(initialTime);
           setIsRunning(false);
+          PushNotification.localNotification({
+            channelId: "timer",
+            title: "Time's up!",
+            message: "That's all.",
+            timeoutAfter: 2000,
+          });
         }
       },200);
       return () => {
         BackgroundTimer.stopBackgroundTimer();
-        PushNotification.localNotification({
-          channelId: 'timer',
-          title: "Time's up!",
-          message: "That's all.",
-          timeoutAfter: 2000,
-        });
       };
     } else {
       /* Timer cleaned by useEffect return */
+      setTime(initialTime);
     }
-  }, [isRunning]);
+  }, [isRunning, initialTime]);
 
   return (
     <View style={[styles.container, s.container]}>
       <StatusBar hidden={true}/>
-      <TouchableOpacity onPress={() => {
-        setIsRunning(!isRunning);
-        setTime(initialTime);
-      }} >
+      <Modal
+        transparent
+        visible={modal}
+        statusBarTranslucent
+        animated
+        animationType={'fade'}
+      >
+        <TimeInput initialSeconds={initialTime} setResult={setInitialTime} hideModal={() => setModal(false)}/>
+      </Modal>
+
+      <TouchableOpacity
+        onPress={() => {
+          setIsRunning(!isRunning);
+          setTime(initialTime);
+        }}
+        delayLongPress={300}
+        onLongPress={() => setModal(true)}
+      >
         <Circle color='red'>
           <Circle color='white' extraMargin={5}>
             <View style={{height: '70%', width: '85%', justifyContent: 'center'}}>
@@ -96,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 128,
     fontWeight: 'bold',
     fontVariant: ['tabular-nums'],
-  }
+  },
 })
 
 export default ProfileScreen;
