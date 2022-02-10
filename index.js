@@ -22,9 +22,9 @@ PushNotification.configure({
 
 PushNotification.createChannel(
   {
-    channelId: "timer",
-    channelName: "Timer",
-    playSound: false,
+    channelId: "alarm",
+    channelName: "alarm",
+    playSound: true,
     importance: Importance.HIGH,
     vibrate: true,
     vibration: 800,

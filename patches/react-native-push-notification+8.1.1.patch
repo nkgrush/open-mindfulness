@@ -1,0 +1,31 @@
+diff --git a/node_modules/react-native-push-notification/android/src/main/java/com/dieam/reactnativepushnotification/modules/RNPushNotificationHelper.java b/node_modules/react-native-push-notification/android/src/main/java/com/dieam/reactnativepushnotification/modules/RNPushNotificationHelper.java
+index 248ff08..90bb152 100644
+--- a/node_modules/react-native-push-notification/android/src/main/java/com/dieam/reactnativepushnotification/modules/RNPushNotificationHelper.java
++++ b/node_modules/react-native-push-notification/android/src/main/java/com/dieam/reactnativepushnotification/modules/RNPushNotificationHelper.java
+@@ -906,12 +906,21 @@ public class RNPushNotificationHelper {
+             channel.setVibrationPattern(vibratePattern);
+ 
+             if (soundUri != null) {
+-                AudioAttributes audioAttributes = new AudioAttributes.Builder()
+-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+-                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+-                        .build();
++                if ("alarm".equals(channel_id)) {
++                    AudioAttributes audioAttributes = new AudioAttributes.Builder()
++                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
++                            .setUsage(AudioAttributes.USAGE_ALARM)
++                            .build();
+ 
+-                channel.setSound(soundUri, audioAttributes);
++                    channel.setSound(soundUri, audioAttributes);
++                } else {
++                    AudioAttributes audioAttributes = new AudioAttributes.Builder()
++                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
++                            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
++                            .build();
++
++                    channel.setSound(soundUri, audioAttributes);
++                }
+             } else {
+                 channel.setSound(null, null);
+             }

@@ -58,9 +58,11 @@ const ProfileScreen = ({route}) => {
           setTime(initialTime);
           setIsRunning(false);
           PushNotification.localNotification({
-            channelId: "timer",
+            channelId: "alarm",
             title: "Time's up!",
             message: "That's all.",
+            playSound: true,
+            soundName: "default",
             timeoutAfter: 2000,
           });
         }
