@@ -1,5 +1,5 @@
 import React from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {writeStorage, readStorage} from './Storage';
 
 // React context
 
@@ -16,29 +16,9 @@ let sections = {
 let ConfigContext = React.createContext(defaultConfig);
 
 // Storage
-const readConfig = async (setConfig) => {
-  console.log('read config');
-  try {
-    const value = await AsyncStorage.getItem('config');
-    if (value === null) {
-      writeConfig(defaultConfig);
-      console.log('set default config');
-    } else {
-      setConfig(JSON.parse(value));
-      console.log('read config', value);
-    }
-  } catch(e) {
-    console.error('AsyncStorage error: ', e);
-  }
-};
+const readConfig = async (setConfig) => (
+  await readStorage('config', setConfig, defaultConfig));
 
-const writeConfig = async (value) => {
-  console.log('write config');
-  try {
-    await AsyncStorage.setItem('config', JSON.stringify(value));
-  } catch (e) {
-    console.error('writeConfig:', e);
-  }
-};
+const writeConfig = async (value) => writeStorage('config', value);
 
 export {defaultConfig, ConfigContext, sections, readConfig, writeConfig};

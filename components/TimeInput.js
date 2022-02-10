@@ -57,8 +57,15 @@ const TimeInput = ({hideModal, initialSeconds, setResult}) => {
     >
       <TouchableWithoutFeedback>
           <View style={s.modalCard}>
-            <Text style={s.modalHeader}>mm:ss</Text>
-            <Text style={s.modalTime}>{inputToText(input)}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setResult(inputToSeconds(input));
+                hideModal();
+              }} activeOpacity={1}
+            >
+              <Text style={s.modalHeader}>mm:ss</Text>
+              <Text style={s.modalTime}>{inputToText(input)}</Text>
+            </TouchableOpacity>
             <VirtualKeyboard clearOnLongPress color="white" pressMode="string"
                              backspaceImg={backspace} textStyle={{fontSize: 50}} onPress={(val) => setInput(val.replace(/^0+/, ''))}/>
           </View>

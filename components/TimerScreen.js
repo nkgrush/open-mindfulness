@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacity, Modal } from "react-native";
 
 import BackgroundTimer from 'react-native-background-timer';
+import PushNotification from "react-native-push-notification";
 
 import s from './Style';
-import PushNotification from "react-native-push-notification";
 import {TimeInput, secondsToString } from "./TimeInput";
+import {readStorage, writeStorage} from "./Storage";
 
 const margin = 16;
 
@@ -41,6 +42,9 @@ const ProfileScreen = ({route}) => {
 
   let display = secondsToString(time);
 
+  useEffect(() => {
+    readStorage('initialTime', setInitialTime, 60*2);
+  }, []);
 
   useEffect(() => {
     if (isRunning) {
@@ -80,7 +84,13 @@ const ProfileScreen = ({route}) => {
         animated
         animationType={'fade'}
       >
-        <TimeInput initialSeconds={initialTime} setResult={setInitialTime} hideModal={() => setModal(false)}/>
+        <TimeInput
+          initialSeconds={initialTime}
+          setResult={(val) => {
+            setInitialTime(val);
+            writeStorage('initialTime', val);
+          }}
+          hideModal={() => setModal(false)}/>
       </Modal>
 
       <TouchableOpacity
@@ -89,7 +99,10 @@ const ProfileScreen = ({route}) => {
           setTime(initialTime);
         }}
         delayLongPress={300}
-        onLongPress={() => setModal(true)}
+        onLongPress={() => {
+          setIsRunning(false);
+          setModal(true);
+        }}
       >
         <Circle color='red'>
           <Circle color='white' extraMargin={5}>
