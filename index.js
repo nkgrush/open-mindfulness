@@ -23,11 +23,35 @@ PushNotification.configure({
 PushNotification.createChannel(
   {
     channelId: "alarm",
-    channelName: "alarm",
+    channelName: "Time's up",
     playSound: true,
     importance: Importance.HIGH,
     vibrate: true,
     vibration: 800,
+    visibility: 'public',
+  },
+  (created) => console.log(`createChannel returned '${created}'`)
+);
+
+PushNotification.createChannel(
+  {
+    channelId: "vibration",
+    channelName: "Time's up",
+    playSound: false,
+    importance: Importance.DEFAULT,
+    vibrate: true,
+    vibration: 800,
+    visibility: 'public',
+  },
+  (created) => console.log(`createChannel returned '${created}'`)
+);
+
+PushNotification.createChannel(
+  {
+    channelId: "sound",
+    channelName: "Time's up",
+    playSound: true,
+    importance: Importance.HIGH,
     visibility: 'public',
   },
   (created) => console.log(`createChannel returned '${created}'`)

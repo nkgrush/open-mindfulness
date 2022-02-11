@@ -9,14 +9,13 @@ const BadgeConfig = ({title, fontSize, options, active, onActiveChange, horizont
 
   const content = options.map(el => (
     <Badge
-      text={el.text}
-      key={el.id}
-      isActive={el.id == active}
+      text={el}
+      key={el}
+      isActive={el == active}
       onPress={() => {
-        onActiveChange(el.id);
+        onActiveChange(el);
       }}
       fontSize={fontSize}
-      color={el.color}
     />
   ));
 
@@ -25,7 +24,7 @@ const BadgeConfig = ({title, fontSize, options, active, onActiveChange, horizont
       <Text style={s.header}>{title}</Text>
       {horizontalScroll ?
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>{content}</ScrollView> :
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{content}</View>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap'}}>{content}</View>
       }
     </View>
   );

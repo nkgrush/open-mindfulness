@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacity, Modal } from "react-native";
 
 import BackgroundTimer from 'react-native-background-timer';
@@ -7,6 +7,7 @@ import PushNotification from "react-native-push-notification";
 import s from './Style';
 import {TimeInput, secondsToString } from "./TimeInput";
 import {readStorage, writeStorage} from "./Storage";
+import { ConfigContext } from "./ConfigContext";
 
 const margin = 16;
 
@@ -29,6 +30,8 @@ const Circle = ({children, color, extraMargin= 0}) => {
 
 const ProfileScreen = ({route}) => {
   //const {time} = route.params;
+
+  let {config, updateConfig} = useContext(ConfigContext);
 
   const
     hideStatusBar = true,
@@ -57,12 +60,19 @@ const ProfileScreen = ({route}) => {
         } else {
           setTime(initialTime);
           setIsRunning(false);
+
+          const channelId = {
+            'Vibration': 'vibration',
+            'Just sound': 'sound',
+            'Ignore Silent mode': 'alarm',
+          }[config.timer];
+
+          console.log(channelId)
+
           PushNotification.localNotification({
-            channelId: "alarm",
+            channelId: channelId,
             title: "Time's up!",
             message: "That's all.",
-            playSound: true,
-            soundName: "default",
             timeoutAfter: 2000,
           });
         }

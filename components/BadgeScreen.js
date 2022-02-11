@@ -4,29 +4,11 @@ import { Text, View, StyleSheet, TextInput, FlatList, StatusBar } from "react-na
 import Badge from './Badge.js';
 import s from './Style.js'
 import BadgeConfig from "./BadgeConfig";
-import {ConfigContext} from "./ConfigContext";
-
-const dummyOptions = [
-  {text: 'Text', id: 'id'},
-  {text: 'hellouu', id: 'hello'},
-  {text: 'my name', id: 'name'},
-  {text: 'is fancy', id: 'fancy'},
-  {text: 'badgerhinoo', id: 'badgerhinoo'},
-  {text: 'hellouu', id: 'h1'},
-  {text: 'hellouu', id: 'h2'},
-  {text: 'hellouu', id: 'h3'},
-  {text: 'hellouu', id: 'h4'},
-]
-
-let dummySections = {
-  badge: {title: 'Badge..', options: dummyOptions},
-  option1: {title: 'Config 🎉', options: dummyOptions},
-};
+import {ConfigContext, sections} from "./ConfigContext";
 
 const BadgeScreen = ({route}) => {
   let {config, updateConfig} = useContext(ConfigContext);
  // let sections = route.params.sections;
-  let sections = dummySections
 
   let setter = (key) => (
       (val) => {
@@ -47,22 +29,6 @@ const BadgeScreen = ({route}) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
-        ListHeaderComponent={
-          <BadgeConfig
-            fontSize={28}
-            title='Profiles'
-            active={1}
-            horizontalScroll={true}
-            options={[
-              {text: 'One', id: 1, color: 'red'},
-              {text: 'two', id: 2},
-              {text: 'three', id: 3},
-              {text: 'four', id: 4},
-              {text: 'five', id: 5},
-              {text: 'six', id: 6},
-            ]}
-          />
-        }
         renderItem={({item}) => (
           <BadgeConfig
             title={item.title}
