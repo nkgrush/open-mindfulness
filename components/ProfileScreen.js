@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from "react";
 import { View, Text, StatusBar } from "react-native";
 
-import s from './Style';
+import { StyleContext } from "./Style";
 
 const ProfileScreen = ({route}) => {
+  let {style: s} = useContext(StyleContext);
   const {profileName} = route.params;
   return (
     <View style={s.container}>

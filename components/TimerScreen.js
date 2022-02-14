@@ -4,10 +4,11 @@ import { View, Text, StatusBar, StyleSheet, useWindowDimensions, TouchableOpacit
 import BackgroundTimer from 'react-native-background-timer';
 import PushNotification from "react-native-push-notification";
 
-import s from './Style';
+import { StyleContext } from "./Style";
 import {TimeInput, secondsToString } from "./TimeInput";
 import {readStorage, writeStorage} from "./Storage";
 import { ConfigContext } from "./ConfigContext";
+import { useTheme } from "@react-navigation/native";
 
 const margin = 16;
 
@@ -32,6 +33,8 @@ const ProfileScreen = ({route}) => {
   //const {time} = route.params;
 
   let {config, updateConfig} = useContext(ConfigContext);
+  let s = useContext(StyleContext);
+  let theme = useTheme();
 
   const
     hideStatusBar = true,
@@ -116,8 +119,8 @@ const ProfileScreen = ({route}) => {
           setModal(true);
         }}
       >
-        <Circle color='red'>
-          <Circle color='white' extraMargin={5}>
+        <Circle color={theme.colors.primary}>
+          <Circle color={theme.colors.background} extraMargin={5}>
             <View style={{height: '70%', width: '85%', justifyContent: 'center'}}>
               <Text adjustsFontSizeToFit={true} style={[s.header, styles.numbers]}>{display}</Text>
             </View>

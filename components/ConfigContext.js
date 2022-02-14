@@ -1,8 +1,6 @@
 import React from 'react';
 import {writeStorage, readStorage} from './Storage';
 
-// React context
-
 const sections = {
   theme: {//TODO
     title: 'Theme',

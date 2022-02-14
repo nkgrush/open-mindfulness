@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from "react";
 
 import VirtualKeyboard from 'react-native-virtual-keyboard';
 import backspace from '../backspace.png';
@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import s from './Style';
+import { StyleContext } from "./Style";
 
 const inputToSeconds = (text) => {
   if (!text) return 60*2;
@@ -45,6 +45,7 @@ const secondsToInput = (secs) => {
 
 const TimeInput = ({hideModal, initialSeconds, setResult}) => {
   let [input, setInput] = useState(secondsToInput(initialSeconds));
+  let s = useContext(StyleContext);
 
   return (
     <TouchableOpacity

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, View, ScrollView, StyleSheet, TextInput } from "react-native";
 
 import Badge from './Badge.js';
-import s from './Style.js'
+import {StyleContext} from "./Style";
 
-const BadgeConfig = ({title, fontSize, options, active, onActiveChange, horizontalScroll}) => {
+const BadgeConfig = ({title, fontSize, options, active, onActiveChange,
+                       horizontalScroll, inactiveColor='lightgrey', textColor='black'}) => {
   onActiveChange = onActiveChange ?? ((x) => {});
+  let s = useContext(StyleContext);
 
   const content = options.map(el => (
     <Badge
@@ -16,6 +18,8 @@ const BadgeConfig = ({title, fontSize, options, active, onActiveChange, horizont
         onActiveChange(el);
       }}
       fontSize={fontSize}
+      inactiveColor={inactiveColor}
+      textColor={textColor}
     />
   ));
 

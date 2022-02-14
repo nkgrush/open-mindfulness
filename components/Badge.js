@@ -3,21 +3,22 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 const defaultHeight = 20;
 
-const colors = [ 'red', 'gold', 'greenyellow', 'mediumslateblue', 'royalblue', 'salmon', 'orange', 'pink', 'yellowgreen' ];
+const colors = [ 'red', 'mediumslateblue', 'royalblue', 'salmon', 'orange', 'forestgreen'];
 
-const Badge = ({text, fontSize=22, color, onPress, isActive}) => {
+const Badge = ({text, fontSize=22, color, onPress, isActive,
+                 inactiveColor='lightgrey', textColor='black'}) => {
   color = color ?? colors[Math.floor(Math.random()*colors.length)];
   let [bg, setBg] = useState(color);
 
   const badgeStyle = {
-    backgroundColor: (isActive ? bg : 'lightgrey'),
+    backgroundColor: (isActive ? bg : inactiveColor),
     borderRadius: fontSize,
     paddingVertical: 4,
     paddingHorizontal: 10,
     margin: 2,
   };
   const textStyle = {
-    color: 'black',
+    color: textColor,
     fontWeight: isActive ? 'bold' : 'normal',
     fontSize: fontSize,
   };
