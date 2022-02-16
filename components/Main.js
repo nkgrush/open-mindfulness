@@ -5,8 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ProfileScreen from './ProfileScreen.js';
-import SettingsScreen from './SettingsScreen.js';
 import TimerScreen from './TimerScreen.js';
 import BadgeScreen from './BadgeScreen.js';
 import { ConfigContext, defaultConfig, readConfig, sections, writeConfig } from "./ConfigContext";
@@ -15,12 +13,11 @@ import PushNotification from "react-native-push-notification";
 import { readStorage, writeStorage } from "./Storage";
 
 const Tab = createMaterialTopTabNavigator();
-const profileNames = ['1', '2', '3'];
 
 const Main = () => {
   let [config, setConfig] = useState(defaultConfig);
-  let [theme, setTheme] = useState(lightTheme);
-  let [style, setStyle] = useState(getStyle('Light'));
+  let [theme, setTheme] = useState(darkTheme);
+  let [style, setStyle] = useState(getStyle('Dark'));
 
   const updateConfig = (newConfig) => {
     setConfig(newConfig);
