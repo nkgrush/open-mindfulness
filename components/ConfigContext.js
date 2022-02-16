@@ -2,17 +2,9 @@ import React from 'react';
 import {writeStorage, readStorage} from './Storage';
 
 const sections = {
-  theme: {//TODO
+  theme: {
     title: 'Theme',
     options: ['Light', 'Dark', 'Adaptive'],
-  },
-  oledBlack: {//TODO
-    title: 'Dark theme',
-    options: ['Dark gray', 'True black'],
-  },
-  accentColor: {//TODO
-    title: 'Accent color',
-    options: ['Red'],
   },
   timer: {
     title: 'Timer alarm',
@@ -20,7 +12,7 @@ const sections = {
   },
   notifications: {//TODO
     title: 'Notifications',
-    options: ['Send', "Don't send"]
+    options: ['Send', "Don't send"],
   },
 };
 
