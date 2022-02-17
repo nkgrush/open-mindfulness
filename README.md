@@ -4,6 +4,8 @@
 It does what it should and nothing more. A simple app to keep you mindful throughout your day. \
 I wrote it because other apps have too much unwanted features and there are only a few open source alternatives.
 
+![screenshots](https://user-images.githubusercontent.com/25302233/154538453-6f871020-afda-48fc-a8c8-ca80cb343acb.png)
+
 Feel free to submit pull requests and issues!
 
 ## Non-fetures which will _never_ be implemented
